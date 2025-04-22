@@ -1,20 +1,28 @@
-PREFIX ?= /usr/local/
-PROGRAM=jonark-fetcher
-CC=gcc
-CFLAGS=-I$(PREFIX)/include
-LDFLAGS=-L$(PREFIX)/lib -lcollectc
+PREFIX ?= /usr/local
+PROGRAM := jonark-fetcher
+CC := gcc
 
-objects=main.o
+
+CFLAGS ?= -g
+CFLAGS += -I$(PREFIX)/include
+WARNINGS ?= -Wall -Wextra
+
+LDFLAGS ?=
+LDFLAGS += -L$(PREFIX)/lib
+LDLIBS := -lcollectc
+
+SRCS := main.c
+OBJS := $(SRCS:.c=.o)
 
 all: $(PROGRAM)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(WARNINGS) -c $< -o $@
 
-$(PROGRAM): $(objects)
-	$(CC) $^ $(CFLAGS) -o $@ $(LDFLAGS)
+$(PROGRAM): $(OBJS)
+	$(CC) $^ $(CFLAGS) -o $@ $(LDFLAGS) $(LDLIBS)
 
 clean:
-	rm -f $(PROGRAM) $(objects)
+	$(RM) $(PROGRAM) $(OBJS)
 
 .PHONY: all $(PROGRAM) clean
