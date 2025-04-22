@@ -15,15 +15,16 @@ System information fetcher written by Jonark.
 > you might need to copy the header files too, as they are not copied in its `make install`:
 
 ```shell
-$ git clone
+$ git clone git@github.com:srdja/Collections-C.git
 $ cd Collections-C
 $ mkdir -p $HOME/Programming/prefixes/jonark-fetcher/include/
-$ cmake -B build -S . -dCMAKE_INSTALL_PREFIX=$HOME/Programming/prefixes/jonark-fetcher
-$ cmake --install . --prefix $HOME/Programming/prefixes/jonark-fetcher
+$ cmake -B build -S . -DCMAKE_INSTALL_PREFIX=$HOME/Programming/prefixes/jonark-fetcher
+$ cmake --build build -j
+$ cmake --install build --prefix $HOME/Programming/prefixes/jonark-fetcher
 $ cp -r src/include/* $HOME/Programming/prefixes/jonark-fetcher/include/
 ```
 
-## Compiling the project
+### Compiling the project
 
 
 ```shell
